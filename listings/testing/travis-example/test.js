@@ -1,7 +1,7 @@
-var assert = require('assert');
+const assert = require('assert')
 
 function square(a) {
-  return a * a;
+  return a * a
 }
 
-assert.equal(square(4), 16); //<co id="callout-testing-travis-test-1" />
+assert.equal(square(4), 16) //<co id="callout-testing-travis-test-1" />

@@ -1,2 +1,4 @@
-{ "name" : "group",
-  "main" : "./index.js" }
+{
+  "name": "group",
+  "main": "./index.js"
+}

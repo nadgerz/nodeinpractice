@@ -1,4 +1,4 @@
-var group = require('./group'); //<co id="callout-globals-modules-group-load" />
+const group = require('./group') //<co id="callout-globals-modules-group-load" />
 
-group.one();
-group.two();
+group.one()
+group.two()

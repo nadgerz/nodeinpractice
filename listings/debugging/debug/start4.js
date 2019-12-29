@@ -1,12 +1,12 @@
-var util = require('util')
-var a = 0
+const util = require('util')
+let a = 0
 util.log('starting')
 
-function changeA () {
+function changeA() {
   a = 100
 }
 
-function addToA (toAdd) {
+function addToA(toAdd) {
   a += toAdd
 }
 

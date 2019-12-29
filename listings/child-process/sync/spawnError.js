@@ -1,8 +1,7 @@
-var sp = require('child_process').spawnSync
+const sp = require('child_process').spawnSync
 try {
-  var ps = sp('cd', ['non-existant-dir'])
+  const ps = sp('cd', ['non-existant-dir'])
   console.log(ps)
-}
-catch (er) {
+} catch (er) {
   console.log('error')
 }

@@ -1,23 +1,23 @@
-var http = require('http');
+const http = require('http')
 
-var server = http.createServer(function(req, res) {
+const server = http.createServer((req, res) => {
   if (req.url.match(/^\/square/)) {
-    var params = req.url.split('/'); //<co id="callout-testing-mocha-web-app-1" />
-    var number;
+    const params = req.url.split('/') //<co id="callout-testing-mocha-web-app-1" />
+    let number
     if (params.length > 1 && params[2]) {
-      number = parseInt(params[2], 10);
-      res.writeHead(200);
-      res.end((number * number).toString()); //<co id="callout-testing-mocha-web-app-2" />
+      number = parseInt(params[2], 10)
+      res.writeHead(200)
+      res.end((number * number).toString()) //<co id="callout-testing-mocha-web-app-2" />
     } else {
-      res.writeHead(500); //<co id="callout-testing-mocha-web-app-3" />
-      res.end('Invalid input');
+      res.writeHead(500) //<co id="callout-testing-mocha-web-app-3" />
+      res.end('Invalid input')
     }
   } else {
-    res.writeHead(404);
-    res.end('Not found');
+    res.writeHead(404)
+    res.end('Not found')
   }
 })
 
-server.listen(8000);
+server.listen(8000)
 
-module.exports = server;
+module.exports = server

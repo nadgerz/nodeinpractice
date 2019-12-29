@@ -1,12 +1,12 @@
-var cp = require('child_process')
+const cp = require('child_process')
 
-var child = cp.fork('./child', { silent: true })
+const child = cp.fork('./child', { silent: true })
 child.send('monkeys')
-child.on('message', function (message) {
+child.on('message', message => {
   console.log('got message from child', message, typeof message)
 })
 child.stdout.pipe(process.stdout)
 
-setTimeout(function () {
+setTimeout(() => {
   child.disconnect()
 }, 3000)

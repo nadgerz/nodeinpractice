@@ -1,11 +1,11 @@
-var http = require('http')
+const http = require('http')
 
-var server = http.createServer(function (req, res) {
+const server = http.createServer((req, res) => {
   response.end('data') // ReferenceError
 })
 server.listen(3000)
 
-process.on('uncaughtException', function (er) {
+process.on('uncaughtException', er => {
   console.error(er)
   server.close()
   setTimeout(process.exit, 15000, 1)

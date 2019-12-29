@@ -1,10 +1,10 @@
-var a = 0
+let a = 0
 
-function changeA () {
+function changeA() {
   a = 50
 }
 
-function addToA (toAdd) {
+function addToA(toAdd) {
   a += toAdd
 }
 

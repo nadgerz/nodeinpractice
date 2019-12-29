@@ -1,18 +1,22 @@
-var fs = require('fs')
-var join = require('path').join
+const fs = require('fs')
+const join = require('path').join
 
-exports.findSync = function (nameRe, startPath) {
-  var results = []
+exports.findSync = function(nameRe, startPath) {
+  const results = []
 
-  function finder (path) {
-    var files = fs.readdirSync(path)
+  function finder(path) {
+    const files = fs.readdirSync(path)
 
-    for (var i = 0; i < files.length; i++) {
-      var fpath = join(path,files[i])
-      var stats = fs.statSync(fpath)
+    for (let i = 0; i < files.length; i++) {
+      const fpath = join(path, files[i])
+      const stats = fs.statSync(fpath)
 
-      if (stats.isDirectory()) finder(fpath)
-      if (stats.isFile() && nameRe.test(files[i])) results.push(fpath)
+      if (stats.isDirectory()) {
+        finder(fpath)
+      }
+      if (stats.isFile() && nameRe.test(files[i])) {
+        results.push(fpath)
+      }
     }
   }
 
@@ -20,32 +24,44 @@ exports.findSync = function (nameRe, startPath) {
   return results
 }
 
-exports.find = function (nameRe, startPath, cb) {
-  var results = []
-  var asyncOps = 0
+exports.find = function(nameRe, startPath, cb) {
+  const results = []
+  let asyncOps = 0
 
-  function finder (path) {
+  function finder(path) {
     asyncOps++
-    fs.readdir(path, function (er, files) {
-      if (er) return cb(er)
+    fs.readdir(path, (er, files) => {
+      if (er) {
+        return cb(er)
+      }
 
-      files.forEach(function (file) {
-        var fpath = join(path,file)
+      files.forEach(file => {
+        const fpath = join(path, file)
 
         asyncOps++
-        fs.stat(fpath, function (er, stats) {
-          if (er) return cb(er)
+        fs.stat(fpath, (er, stats) => {
+          if (er) {
+            return cb(er)
+          }
 
-          if (stats.isDirectory()) finder(fpath)
-          if (stats.isFile() && nameRe.test(file)) results.push(fpath)
+          if (stats.isDirectory()) {
+            finder(fpath)
+          }
+          if (stats.isFile() && nameRe.test(file)) {
+            results.push(fpath)
+          }
 
           asyncOps--
-          if (asyncOps == 0) cb(null, results)
+          if (asyncOps == 0) {
+            cb(null, results)
+          }
         })
       })
 
       asyncOps--
-      if (asyncOps == 0) cb(null, results)
+      if (asyncOps == 0) {
+        cb(null, results)
+      }
     })
   }
 

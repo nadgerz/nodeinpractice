@@ -5,4 +5,4 @@ function createUser() {
   }
 }
 
-console.log(createUser());
+console.log(createUser())

@@ -1,5 +1,5 @@
-var assert = require('assert')
-var fastfib = require ('../')
+const assert = require('assert')
+const fastfib = require('../')
 
 assert.equal(fastfib(0), 0)
 assert.equal(fastfib(1), 1)

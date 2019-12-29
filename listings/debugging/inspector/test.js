@@ -1,7 +1,7 @@
-var http = require('http')
+const http = require('http')
 
-var server = http.createServer()
-server.on('request', function (req, res) {
+const server = http.createServer()
+server.on('request', (req, res) => {
   res.end('Hello World')
 })
 server.listen(3000)

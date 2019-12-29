@@ -1,7 +1,7 @@
 exports.method = function() {
-  return 'Hello';
-};
+  return 'Hello'
+}
 
 exports.method2 = function() {
-  return 'Hello again';
-};
+  return 'Hello again'
+}

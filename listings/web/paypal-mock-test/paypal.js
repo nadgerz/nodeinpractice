@@ -1,18 +1,18 @@
-var request = require('request');
+const request = require('request')
 
 function PayPal(options) {
-  this.url = options.payPalUrl;
-  this.rootUrl = options.rootUrl;
-  this.payPalUrl = options.payPalUrl;
+  this.url = options.payPalUrl
+  this.rootUrl = options.rootUrl
+  this.payPalUrl = options.payPalUrl
 }
 
 PayPal.prototype.generateUrl = function(order) {
-  var customer = order.customer;
-  var options = {
+  const customer = order.customer
+  const options = {
     business: this.user,
     image_url: this.rootUrl + '/img/store.gif',
     cbt: 'Download the book now',
-    'return': this.rootUrl + '/paypal/success',
+    return: this.rootUrl + '/paypal/success',
     cancel_return: this.rootUrl + '/paypal/cancel',
     notify_url: '',
     cmd: '_xclick',
@@ -39,38 +39,38 @@ PayPal.prototype.generateUrl = function(order) {
     discount_amount: 0,
     invoice: order.id,
     item_name: 'Node in Practice',
-    tax: 5
-  };
+    tax: 5,
+  }
 
   // Escape the options
-  var url = this.payPalUrl;
-  var urlParts = [];
-  for (var key in options) {
+  let url = this.payPalUrl
+  const urlParts = []
+  for (const key in options) {
     if (options.hasOwnProperty(key)) {
-      urlParts.push(key + '=' + encodeURIComponent(options[key]));
+      urlParts.push(key + '=' + encodeURIComponent(options[key]))
     }
   }
 
-  url = url + '?' + urlParts.join('&');
+  url = url + '?' + urlParts.join('&')
 
-  return url;
-};
+  return url
+}
 
 PayPal.prototype.verify = function(order, cb) {
-  var cmd = '_notify-validate';
+  const cmd = '_notify-validate'
 
   request.post(
     this.payPalUrl + '?cmd=' + cmd,
     { form: order },
-    function(err, res, body) {
+    (err, res, body) => {
       if (body && body === 'VERIFIED') {
-        cb();
+        cb()
       } else if (!err) {
-        err = new Error('PayPal IPN error: ' + body);
+        err = new Error('PayPal IPN error: ' + body)
       }
-      cb(err);
-    }.bind(this)
-  );
-};
+      cb(err)
+    },
+  )
+}
 
-module.exports = PayPal;
+module.exports = PayPal

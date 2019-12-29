@@ -1,9 +1,10 @@
-var app = require('./../app');
-var assert = require('assert');
-var request = require('supertest');
-var payPalMock = require('./paypalmock');
+const app = require('./../app')
+const assert = require('assert')
+const request = require('supertest')
+const payPalMock = require('./paypalmock')
 
-function makeCustomer() { //<co id="callout-web-test-paypal-3-1" />
+function makeCustomer() {
+  //<co id="callout-web-test-paypal-3-1" />
   return {
     address1: '123',
     city: 'Nottingham',
@@ -13,56 +14,60 @@ function makeCustomer() { //<co id="callout-web-test-paypal-3-1" />
     last_name: 'Smith',
     state: 'Nottinghamshire',
     zip: 'NG10932',
-    tax_number: ''
-  };
+    tax_number: '',
+  }
 }
 
-function makeOrder() { //<co id="callout-web-test-paypal-3-2" />
+function makeOrder() {
+  //<co id="callout-web-test-paypal-3-2" />
   return {
     id: 1,
-    customer: makeCustomer()
-  };
+    customer: makeCustomer(),
+  }
 }
 
-function makePayPalIpn(order) { //<co id="callout-web-test-paypal-3-3" />
+function makePayPalIpn(order) {
+  //<co id="callout-web-test-paypal-3-3" />
   // More fields should be used for the real PayPal system
   return {
-    'payment_status': 'Completed',
-    'receiver_email': order.customer.email,
-    'invoice': order.id
-  };
+    payment_status: 'Completed',
+    receiver_email: order.customer.email,
+    invoice: order.id,
+  }
 }
 
-describe('buying the book', function() {
-  var payPalServer;
+describe('buying the book', () => {
+  let payPalServer
 
-  before(function(done) { //<co id="callout-web-test-paypal-3-4" />
-    payPalServer = payPalMock.listen(3001, done);
-  });
+  before(done => {
+    //<co id="callout-web-test-paypal-3-4" />
+    payPalServer = payPalMock.listen(3001, done)
+  })
 
-  after(function(done) { //<co id="callout-web-test-paypal-3-5" />
-    payPalServer.close(done);
-  });
+  after(done => {
+    //<co id="callout-web-test-paypal-3-5" />
+    payPalServer.close(done)
+  })
 
-  it('should redirect the user to paypal', function(done) {
-    var order = makeOrder();
+  it('should redirect the user to paypal', done => {
+    const order = makeOrder()
 
     request(app)
       .post('/buy')
       .send(order)
-      .expect(302, done); //<co id="callout-web-test-paypal-3-6" />
-  });
+      .expect(302, done) //<co id="callout-web-test-paypal-3-6" />
+  })
 
-  it('should handle IPN requests from PayPal', function(done) {
-    var order = makeOrder();
+  it('should handle IPN requests from PayPal', done => {
+    const order = makeOrder()
 
-    app.once('purchase:accepted', function(details) {
-      assert.equal(details.receiver_email, order.customer.email);
-    });
+    app.once('purchase:accepted', details => {
+      assert.equal(details.receiver_email, order.customer.email)
+    })
 
     request(app)
       .post('/paypal/success')
       .send(makePayPalIpn(order))
-      .expect(200, done); //<co id="callout-web-test-paypal-3-7" />
-  });
-});
+      .expect(200, done) //<co id="callout-web-test-paypal-3-7" />
+  })
+})

@@ -1,11 +1,11 @@
 function Bomb() {
-  this.message = 'Boom!';
+  this.message = 'Boom!'
 }
 
 Bomb.prototype.explode = function() {
-  console.log(this.message);
-};
+  console.log(this.message)
+}
 
-var bomb = new Bomb();
+const bomb = new Bomb()
 
-setTimeout(bomb.explode.bind(bomb), 1000); //<co id="callout-settimeout-2-1" />
+setTimeout(bomb.explode.bind(bomb), 1000) //<co id="callout-settimeout-2-1" />

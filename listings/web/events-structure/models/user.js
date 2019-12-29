@@ -1,10 +1,10 @@
 function User(fields) {
-  this.name = fields.name;
-  this.email = fields.email;
+  this.name = fields.name
+  this.email = fields.email
 }
 
 User.prototype.save = function(cb) {
-  cb(null);
-};
+  cb(null)
+}
 
-module.exports = User;
+module.exports = User

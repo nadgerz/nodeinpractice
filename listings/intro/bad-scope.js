@@ -1,3 +1,3 @@
 if (!value) {
-  var value = {}; // <co id="bad-scope_1" />
+  var value = {} // <co id="bad-scope_1" />
 }

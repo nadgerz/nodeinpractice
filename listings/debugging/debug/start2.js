@@ -1,11 +1,11 @@
-var a = 0
+let a = 0
 
-function changeA () {
+function changeA() {
   debugger
   a = 100
 }
 
-function addToA (toAdd) {
+function addToA(toAdd) {
   a += toAdd
 }
 

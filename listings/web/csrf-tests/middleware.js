@@ -1,3 +1,3 @@
-var express = require('express');
+const express = require('express')
 
-module.exports.csrf = express.csrf; //<co id="callout-web-testing-seams-1-1"/>
+module.exports.csrf = express.csrf //<co id="callout-web-testing-seams-1-1"/>

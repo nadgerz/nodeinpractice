@@ -1,5 +1,5 @@
-var fs = require('fs')
-process.on('message', function (message) {
+const fs = require('fs')
+process.on('message', message => {
   console.log('got one', message)
   process.send('no pizza')
   process.send(1)

@@ -1,11 +1,11 @@
-var cheerio = require('cheerio');
-var fs = require('fs');
+const cheerio = require('cheerio')
+const fs = require('fs')
 
-fs.readFile('./index.html', 'utf8', function(err, html) {
-  var $ = cheerio.load(html); //<co id="web-cheerio-manning-1" />
-  var releases = $('.Releases a strong'); //<co id="web-cheerio-manning-2" />
+fs.readFile('./index.html', 'utf8', (err, html) => {
+  const $ = cheerio.load(html) //<co id="web-cheerio-manning-1" />
+  const releases = $('.Releases a strong') //<co id="web-cheerio-manning-2" />
 
   releases.each(function(i) {
-    console.log('New release:', this.text()); //<co id="web-cheerio-manning-3" />
-  });
-});
+    console.log('New release:', this.text()) //<co id="web-cheerio-manning-3" />
+  })
+})

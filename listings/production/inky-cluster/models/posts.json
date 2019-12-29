@@ -1,4 +1,7 @@
 [
-  { "title": "Node in Practice", "content": "You too can become a Node professional!" },
+  {
+    "title": "Node in Practice",
+    "content": "You too can become a Node professional!"
+  },
   { "title": "Welcome to my blog", "content": "This is my first post" }
 ]

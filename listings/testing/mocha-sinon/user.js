@@ -1,16 +1,16 @@
-var crypto = require('crypto');
+const crypto = require('crypto')
 
 function User(id, fields) {
-  this.id = id;
-  this.fields = fields;
-  this.db = require('./db');
+  this.id = id
+  this.fields = fields
+  this.db = require('./db')
 }
 
 User.prototype = {
   hashPassword: function(text) {
-    var shasum = crypto.createHash('sha1');
-    shasum.update(text);
-    return shasum.digest('hex');
+    const shasum = crypto.createHash('sha1')
+    shasum.update(text)
+    return shasum.digest('hex')
   },
 
   save: function(cb) {
@@ -18,22 +18,22 @@ User.prototype = {
   },
 
   load: function(cb) {
-    this.db.hmget('user:' + this.id, 'fields', function(err, fields) {
-      this.fields = JSON.parse(fields);
-      cb(err, this);
-    }.bind(this));
+    this.db.hmget('user:' + this.id, 'fields', (err, fields) => {
+      this.fields = JSON.parse(fields)
+      cb(err, this)
+    })
   },
 
   signIn: function(password, cb) {
-    var hashedPassword = this.hashPassword(password);
-    this.load(function(err) {
+    const hashedPassword = this.hashPassword(password)
+    this.load(err => {
       if (err) {
-        cb(err);
+        cb(err)
       } else {
-        cb(null, this.fields.hashedPassword === hashedPassword);
+        cb(null, this.fields.hashedPassword === hashedPassword)
       }
-    }.bind(this));
-  }
-};
+    })
+  },
+}
 
-module.exports = User;
+module.exports = User

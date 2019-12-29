@@ -1,12 +1,12 @@
-var string = '1 string to rule them all'
+const string = '1 string to rule them all'
 
-var leakyArr = []
-var count = 2
-setInterval(function () {
+const leakyArr = []
+let count = 2
+setInterval(() => {
   leakyArr.push(string.replace(/1/g, count++))
 }, 0)
 
-setInterval(function () {
+setInterval(() => {
   gc()
   console.log(process.memoryUsage())
 }, 2000)

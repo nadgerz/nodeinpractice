@@ -1,11 +1,13 @@
-var Database = require('./database')
-var client = new Database('./test.db')
+const Database = require('./database')
+const client = new Database('./test.db')
 
-client.on('load', function () {
-  var foo = client.get('foo')
+client.on('load', () => {
+  const foo = client.get('foo')
 
-  client.set('bar', 'my sweet value', function (er) {
-    if (er) console.error(er)
+  client.set('bar', 'my sweet value', er => {
+    if (er) {
+      console.error(er)
+    }
     console.log('write successful')
   })
 

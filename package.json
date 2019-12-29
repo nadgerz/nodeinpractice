@@ -4,7 +4,21 @@
   "description": "The source code for the book [Node.js in Practice](http://manning.com/young/) (ISBN: 9781617290930).",
   "main": "index.js",
   "scripts": {
+    "format": "pretty-quick --pattern \"**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
+    "format:full": "prettier --write \"listings/**/*.{js,jsx,css,htm,json,ts,html,sass,scss}\"",
+    "lint": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.+(json|css|md)": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",

@@ -1,63 +1,63 @@
-var stream = require('stream');
+const stream = require('stream')
 
-module.exports = CSVParser; //<co id="callout-streams-testing-0-2" />
+module.exports = CSVParser //<co id="callout-streams-testing-0-2" />
 
 CSVParser.prototype = Object.create(stream.Transform.prototype, {
-  constructor: { value: CSVParser }
-});
+  constructor: { value: CSVParser },
+})
 
 function CSVParser(options) {
-  options = options || {};
-  options.objectMode = true;
-  stream.Transform.call(this, options);
+  options = options || {}
+  options.objectMode = true
+  stream.Transform.call(this, options)
 
-  this.value = '';
-  this.headers = [];
-  this.values = [];
-  this.line = 0;
+  this.value = ''
+  this.headers = []
+  this.values = []
+  this.line = 0
 }
 
-CSVParser.prototype._transform = function(chunk, encoding, done) { //<co id="callout-streams-testing-0-1" />
-  var c;
-  var i;
+CSVParser.prototype._transform = function(chunk, encoding, done) {
+  //<co id="callout-streams-testing-0-1" />
+  let c
+  let i
 
-  chunk = chunk.toString();
+  chunk = chunk.toString()
 
   for (i = 0; i < chunk.length; i++) {
-    c = chunk.charAt(i);
+    c = chunk.charAt(i)
 
     if (c === ',') {
-      this.addValue();
+      this.addValue()
     } else if (c === '\n') {
-      this.addValue();
+      this.addValue()
       if (this.line > 0) {
-        this.push(this.toObject());
+        this.push(this.toObject())
       }
-      this.values = [];
-      this.line++;
+      this.values = []
+      this.line++
     } else {
-      this.value += c;
+      this.value += c
     }
   }
 
-  done();
-};
+  done()
+}
 
 CSVParser.prototype.toObject = function() {
-  var i;
-  var obj = {};
+  let i
+  const obj = {}
   for (i = 0; i < this.headers.length; i++) {
-    obj[this.headers[i]] = this.values[i];
+    obj[this.headers[i]] = this.values[i]
   }
-  return obj;
-};
+  return obj
+}
 
 CSVParser.prototype.addValue = function() {
   if (this.line === 0) {
-    this.headers.push(this.value);
+    this.headers.push(this.value)
   } else {
-    this.values.push(this.value);
+    this.values.push(this.value)
   }
-  this.value = '';
-};
-
+  this.value = ''
+}

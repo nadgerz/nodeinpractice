@@ -1,10 +1,10 @@
-var EventEmitter = require('events').EventEmitter;
-var util = require('util');
+const EventEmitter = require('events').EventEmitter
+const util = require('util')
 
 function MessageBus(options) {
-  EventEmitter.call(this, options);
+  EventEmitter.call(this, options)
 }
 
-util.inherits(MessageBus, EventEmitter);
+util.inherits(MessageBus, EventEmitter)
 
-module.exports = MessageBus;
+module.exports = MessageBus

@@ -1,12 +1,11 @@
-function MyClass() {
-}
+function MyClass() {}
 
 MyClass.prototype = {
   method: function() {
-    return 'Hello';
-  }
-};
+    return 'Hello'
+  },
+}
 
-var myClass = new MyClass();
+const myClass = new MyClass()
 
-module.exports = myClass; //<co id="callout-globals-modules-1" />
+module.exports = myClass //<co id="callout-globals-modules-1" />

@@ -1,8 +1,8 @@
-var ex = require('child_process').execFileSync
+const ex = require('child_process').execFileSync
 
 try {
   ex('cd', ['non-existent-dir'], {
-    encoding: 'utf8'
+    encoding: 'utf8',
   })
 } catch (er) {
   console.log('exit status was', er.status)

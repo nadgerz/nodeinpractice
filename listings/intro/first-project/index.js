@@ -1,11 +1,12 @@
-var CountStream = require('./countstream'); //<co id="callout-intro-countstream-index-1" />
-var countStream = new CountStream('book'); //<co id="callout-intro-countstream-index-2" />
-var https = require('https');
+const CountStream = require('./countstream') //<co id="callout-intro-countstream-index-1" />
+const countStream = new CountStream('book') //<co id="callout-intro-countstream-index-2" />
+const https = require('https')
 
-https.get('https://www.manning.com', function(res) { //<co id="callout-intro-countstream-index-3" />
-  res.pipe(countStream); //<co id="callout-intro-countstream-index-4" />
-});
+https.get('https://www.manning.com', res => {
+  //<co id="callout-intro-countstream-index-3" />
+  res.pipe(countStream) //<co id="callout-intro-countstream-index-4" />
+})
 
-countStream.on('total', function(count) {
-  console.log('Total matches:', count);
-});
+countStream.on('total', count => {
+  console.log('Total matches:', count)
+})

@@ -1,16 +1,16 @@
-var EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events').EventEmitter
 
 function complexOperations() {
-  var events = new EventEmitter();
+  const events = new EventEmitter()
 
-  process.nextTick(function() { <co id="callout-globals-nexttick-2"/>
-    events.emit('success');
-  });
+  process.nextTick(() => {
+    ;<co id="callout-globals-nexttick-2" />
+    events.emit('success')
+  })
 
-  return events;
+  return events
 }
 
-complexOperations().on('success', function() {
-  console.log('success!');
-});
-
+complexOperations().on('success', () => {
+  console.log('success!')
+})

@@ -1,35 +1,36 @@
-var util = require('util');
-var events = require('events');
+const util = require('util')
+const events = require('events')
 
 function Pulsar(speed, times) {
-  events.EventEmitter.call(this);
+  events.EventEmitter.call(this)
 
-  var self = this;
-  this.speed = speed;
-  this.times = times;
+  const self = this
+  this.speed = speed
+  this.times = times
 
-  this.on('newListener', function(eventName, listener) {
+  this.on('newListener', (eventName, listener) => {
     if (eventName === 'pulse') {
-      self.start();
+      self.start()
     }
-  });
+  })
 }
 
-util.inherits(Pulsar, events.EventEmitter);
+util.inherits(Pulsar, events.EventEmitter)
 
 Pulsar.prototype.start = function() {
-  var self = this;
-  var id = setInterval(function() {
-    self.emit('pulse');
-    self.times--;
+  const self = this
+  var id = setInterval(() => {
+    self.emit('pulse')
+    self.times--
     if (self.times === 0) {
-      clearInterval(id);
+      clearInterval(id)
     }
-  }, this.speed);
-};
+  }, this.speed)
+}
 
-var pulsar = new Pulsar(500, 5);
+const pulsar = new Pulsar(500, 5)
 
-pulsar.on('pulse', function() { //<co id="callout-events-reflection-2-1" />
-  console.log('.');
-});
+pulsar.on('pulse', () => {
+  //<co id="callout-events-reflection-2-1" />
+  console.log('.')
+})

@@ -1,10 +1,12 @@
-var locker = require('./locker')
+const locker = require('./locker')
 
-locker.lock(function (err) {
-  if (err) throw err
+locker.lock(err => {
+  if (err) {
+    throw err
+  }
   console.log('locked')
 
-  locker.unlock(function () {
+  locker.unlock(() => {
     console.log('unlocked')
   })
 })

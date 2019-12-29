@@ -1,35 +1,43 @@
-var express = require('express');
-var app = express();
-var db = require('./db');
+const express = require('express')
+const app = express()
+const db = require('./db')
 
-app.use(express.bodyParser());
+app.use(express.bodyParser())
 
-app.get('/notes', function(req, res) {
-  db.notes.findAll(function(err, notes) {
-    if (err) return next(err);
-    res.send(notes);
-  });
-});
+app.get('/notes', (req, res) => {
+  db.notes.findAll((err, notes) => {
+    if (err) {
+      return next(err)
+    }
+    res.send(notes)
+  })
+})
 
-app.post('/notes', function(req, res, next) {
-  db.notes.create(req.body.note, function(err, note) {
-    if (err) return next(err);
-    res.send(note);
-  });
-});
+app.post('/notes', (req, res, next) => {
+  db.notes.create(req.body.note, (err, note) => {
+    if (err) {
+      return next(err)
+    }
+    res.send(note)
+  })
+})
 
-app.patch('/notes/:id', function(req, res, next) {
-  db.notes.update(req.param('id'), req.body.note, function(err, note) {
-    if (err) return next(err);
-    res.send(note);
-  });
-});
+app.patch('/notes/:id', (req, res, next) => {
+  db.notes.update(req.param('id'), req.body.note, (err, note) => {
+    if (err) {
+      return next(err)
+    }
+    res.send(note)
+  })
+})
 
-app.get('/notes/:id', function(req, res, next) {
-  db.notes.find(req.param('id'), function(err, note) {
-    if (err) return next(err);
-    res.send(note);
-  });
-});
+app.get('/notes/:id', (req, res, next) => {
+  db.notes.find(req.param('id'), (err, note) => {
+    if (err) {
+      return next(err)
+    }
+    res.send(note)
+  })
+})
 
-app.listen(3000);
+app.listen(3000)

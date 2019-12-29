@@ -1,3 +1,3 @@
 module.exports = {
-  pages: require('./pages')
-};
+  pages: require('./pages'),
+}

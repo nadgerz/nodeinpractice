@@ -1,14 +1,16 @@
-var net = require('net')
-var repl = require('repl')
+const net = require('net')
+const repl = require('repl')
 
-net.createServer(function (socket) {
-  var r = repl.start({
-    input: socket,
-    output: socket
+net
+  .createServer(socket => {
+    const r = repl.start({
+      input: socket,
+      output: socket,
+    })
+    r.on('exit', () => {
+      socket.end()
+    })
   })
-  r.on('exit', function() {
-    socket.end()
-  })
-}).listen(1337)
+  .listen(1337)
 
 console.log('node repl listening on 1337')

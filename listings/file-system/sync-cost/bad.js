@@ -1,7 +1,9 @@
-var fs = require('fs')
-var http = require('http')
+const fs = require('fs')
+const http = require('http')
 
-http.createServer(function (req, res) {
-  var data = fs.readFileSync('./output.dat')
-  res.end(data)
-}).listen(3000)
+http
+  .createServer((req, res) => {
+    const data = fs.readFileSync('./output.dat')
+    res.end(data)
+  })
+  .listen(3000)
